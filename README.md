@@ -3,7 +3,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 #Live deployed To Netlify
-link->http://effulgent-squirrel-ba4711.netlify.app/
+link->http://effulgent-squirrel-ba4711.netlify.app/ 
+#Credentials: userName: admin@Example.com,Password: admin123
 
 ## Available Scripts
 
