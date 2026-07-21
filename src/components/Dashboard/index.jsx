@@ -1,8 +1,8 @@
-import {useState,useEffect} from "react" 
+import {useState,useEffect,useCallback} from "react" 
 import { useNavigate } from "react-router-dom"
 import HeadingSec from "../HeadinSec"
 import Cookies from "js-cookie"
-import {BgContainer,Description,AllReferalsContainer,RefCodeContainer,Header,CopyBtn,RefCode,DetailThree,DetailTwo,DetailOne,DescriptionOne,MainContainer,OverviewCOntainer,OverviewHead,RowUl,ServiceContainer,Servicecard,ReferralsSectionContainer,SectionHeader,FilterControlsBar,FilterGroup,FilterLabel,SearchInputField,SortDropdownSelect,TableWrapper,TableElement,TableHead,TableRow,TableHeaderCell,TableBody,TableFooter,FooterText,PaginationContainer,PaginationButton} from "./StyledComponents"
+import {BgContainer,RefCodeContainer,Header,CopyBtn,RefCode,DetailThree,DetailTwo,DetailOne,DescriptionOne,MainContainer,OverviewCOntainer,OverviewHead,RowUl,ServiceContainer,Servicecard,ReferralsSectionContainer,SectionHeader,FilterControlsBar,FilterGroup,FilterLabel,SearchInputField,SortDropdownSelect,TableWrapper,TableElement,TableHead,TableRow,TableHeaderCell,TableBody,TableFooter,FooterText,PaginationContainer,PaginationButton} from "./StyledComponents"
 import EachOverviewCard from "../EachOverviewCard"
 
 import ReferralRow from "../RefferalRow"
@@ -14,9 +14,6 @@ const Dashboard = ()=>{
     const [summary, setSummary] = useState()
 
     const [isLoading, setLoading] = useState(true)
-    const [errorMsg, setErrorMsg] = useState("");
-
-
   const [searchTerm, setSearchTerm] = useState('');
   const [sortByDate, setSortByDate] = useState('newest');
 
@@ -28,7 +25,7 @@ const [currentPage, setCurrentPage] = useState(1)
     
     
 
-    const fetchDashboardData = async ()=>{
+    const fetchDashboardData = useCallback(async ()=>{
         const jwtToken = Cookies.get("jwt_token") 
         console.log(jwtToken)
         if (!jwtToken) {
@@ -58,16 +55,15 @@ const [currentPage, setCurrentPage] = useState(1)
                 setLoading(false)
             }
 
-        }catch(error){
-            setErrorMsg(error)
+        }catch{
             setLoading(false)
         }
 
-    }
+    }, [navigate])
     useEffect(()=>{
 
         fetchDashboardData();
-    },[])
+    },[fetchDashboardData])
 
     useEffect(() => {
     setCurrentPage(1);

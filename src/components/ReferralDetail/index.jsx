@@ -1,18 +1,17 @@
-import {useEffect, useState} from "react"
+import {useCallback, useEffect, useState} from "react"
 import Cookies from "js-cookie"
 import { useNavigate,useParams } from "react-router-dom"
 import HeadingSec from "../HeadinSec"
 import {BgContainer,CardDetails,Desscription,Header,ButtonOne, CardHeaderRow,PartnerName,ServiceBadge, DetailRow,FieldLabel,FieldValue,ProfitValue} from "./StyledComponents"
 
 
-const ReferralDetail =(props)=>{
+const ReferralDetail =()=>{
     const {id} = useParams(); 
     const [details,setDetails] = useState()
-    const [isLoading, setIsLoading] = useState(true)
 
     const navigate = useNavigate()
     
-    const fetchDashboardData = async ()=>{
+    const fetchDashboardData = useCallback(async ()=>{
 
             const jwtToken = Cookies.get("jwt_token") 
             if (!jwtToken) {
@@ -32,14 +31,13 @@ const ReferralDetail =(props)=>{
                 const response = await fetch(url,options)
                 const data = await response.json()
                 setDetails(data.data.referrals)
-                setIsLoading(false)
             }catch(error){
                 
             }   
-        }
+        }, [id, navigate])
         useEffect(()=>{    
             fetchDashboardData();
-        },[])
+        },[fetchDashboardData])
 
         const buttonClikced = ()=>{
             navigate("/dashboard")
