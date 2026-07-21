@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 #Live deployed To Netlify
-https://gobussiness-siddharth.netlify.app/login
+https://gobussiness-siddharth.netlify.app/
 #Credentials: userName: admin@Example.com,Password: admin123
 
 ## Available Scripts
