@@ -2,7 +2,7 @@ import {CardContainer,Numbers,Text} from "./StyledComponents"
 
 const EachOverviewCard = (props)=>{
     const {each} = props
-    const {label,value,kind} = each
+    const {label,value} = each
 
 
     return(
